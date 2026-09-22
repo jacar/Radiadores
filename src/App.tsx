@@ -18,7 +18,6 @@ import {
   Camera,
   Home,
   Grid,
-  MapPin,
   Mail
 } from 'lucide-react';
 
