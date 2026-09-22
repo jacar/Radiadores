@@ -1,0 +1,10 @@
+{
+  "description": "Transforms JSON data into a fully functional web page, enabling users to visualize and interact with structured information effortlessly.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

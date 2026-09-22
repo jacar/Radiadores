@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #D71920;
+  --color-primary-dark: #b0151a;
+  --color-dark: #111111;
+  --color-darker: #0a0a0a;
+  --color-dark-gray: #1a1a1a;
+  --color-light-gray: #BFC3C7;
+  --color-metallic: #8c9398;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+
+  --animate-fade-in-up: fade-in-up 1s ease-out forwards;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0a] text-gray-300 font-sans antialiased selection:bg-[#D71920]/30 selection:text-white overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-white tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-[#BFC3C7];
+  }
+  
+  .bg-metallic-gradient {
+    @apply bg-gradient-to-br from-[#1a1a1a] to-[#111111] border border-white/5 shadow-2xl;
+  }
+  
+  .glass-nav {
+    @apply bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10;
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+
+  .text-shiny-effect {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D71920] via-[#0055ff] to-[#111111] animate-[shine_3s_ease-in-out_infinite];
+    background-size: 200% auto;
+  }
+}
+
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
