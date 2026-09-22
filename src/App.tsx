@@ -73,7 +73,10 @@ const Problems = [
 ];
 
 function App() {
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [showWaMenu, setShowWaMenu] = useState(false);
   const whatsappUrl = "https://wa.me/573157687743?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
+  const whatsappUrl2 = "https://wa.me/573046106795?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
@@ -424,18 +427,24 @@ function App() {
       </footer>
 
       {/* Floating WhatsApp CTA (Desktop only) */}
-      <a 
-        href={whatsappUrl} 
-        target="_blank" 
-        rel="noreferrer"
-        className="hidden md:flex fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform z-50 items-center justify-center group"
-        aria-label="Contactar por WhatsApp"
-      >
-        <WhatsAppIcon size={32} />
-        <span className="absolute right-full mr-4 bg-white text-[#0a0a0a] px-3 py-1 rounded text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
-          ¡Chatea con nosotros!
-        </span>
-      </a>
+      <div className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end group">
+        {/* Menú emergente de WhatsApp */}
+        <div className="mb-4 bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-2xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col gap-2 min-w-[220px]">
+          <p className="text-white text-sm font-bold px-2 pb-2 border-b border-white/10 mb-1">¿Con quién deseas chatear?</p>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-xl transition-colors">
+            <WhatsAppIcon size={20} className="text-[#25D366]" />
+            <span className="text-gray-200 text-sm font-medium">Línea Principal</span>
+          </a>
+          <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-xl transition-colors">
+            <WhatsAppIcon size={20} className="text-[#25D366]" />
+            <span className="text-gray-200 text-sm font-medium">Línea Alterna</span>
+          </a>
+        </div>
+        {/* Botón Flotante */}
+        <div className="bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.4)] cursor-pointer hover:scale-110 transition-transform flex items-center justify-center">
+          <WhatsAppIcon size={32} />
+        </div>
+      </div>
 
       {/* Mobile Bottom Navigation Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-white/10 z-50 flex justify-around items-center px-2 py-3 pb-safe-area shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
@@ -447,17 +456,47 @@ function App() {
           <Phone size={22} />
           <span className="text-[10px] font-medium uppercase tracking-wider">Llamar</span>
         </a>
-        <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1 text-[#25D366] flex-1">
+        <button onClick={() => setShowWaMenu(true)} className="flex flex-col items-center gap-1 text-[#25D366] flex-1">
           <div className="bg-[#25D366]/10 p-1.5 rounded-full mb-0.5">
              <WhatsAppIcon size={24} />
           </div>
           <span className="text-[10px] font-bold uppercase tracking-wider">WhatsApp</span>
-        </a>
+        </button>
         <a href="#servicios" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors flex-1">
           <Grid size={22} />
           <span className="text-[10px] font-medium uppercase tracking-wider">Servicios</span>
         </a>
       </div>
+
+      {/* Menú Modal WhatsApp (Móvil) */}
+      {showWaMenu && (
+        <div className="md:hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-end justify-center pb-24 px-4" onClick={() => setShowWaMenu(false)}>
+           <div className="bg-[#111111] w-full rounded-3xl p-5 border border-white/10 shadow-2xl animate-fade-in-up" onClick={e => e.stopPropagation()}>
+             <h3 className="text-white font-bold mb-4 text-lg text-center">¿Con quién deseas chatear?</h3>
+             <div className="flex flex-col gap-3">
+               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl active:bg-white/10 transition-colors border border-white/5">
+                 <div className="bg-[#25D366]/20 p-2 rounded-full">
+                    <WhatsAppIcon size={28} className="text-[#25D366]" />
+                 </div>
+                 <div className="flex flex-col">
+                    <span className="text-white font-bold">Línea Principal</span>
+                    <span className="text-gray-400 text-sm">315 768 7743</span>
+                 </div>
+               </a>
+               <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl active:bg-white/10 transition-colors border border-white/5">
+                 <div className="bg-[#25D366]/20 p-2 rounded-full">
+                    <WhatsAppIcon size={28} className="text-[#25D366]" />
+                 </div>
+                 <div className="flex flex-col">
+                    <span className="text-white font-bold">Línea Alterna</span>
+                    <span className="text-gray-400 text-sm">304 610 6795</span>
+                 </div>
+               </a>
+             </div>
+             <button onClick={() => setShowWaMenu(false)} className="w-full mt-4 p-4 text-gray-400 font-bold bg-white/5 rounded-2xl active:bg-white/10">Cancelar</button>
+           </div>
+        </div>
+      )}
     </div>
   );
 }
