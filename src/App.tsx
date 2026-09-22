@@ -17,7 +17,9 @@ import {
   Users,
   Camera,
   Home,
-  Grid
+  Grid,
+  MapPin,
+  Mail
 } from 'lucide-react';
 
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
@@ -376,8 +378,58 @@ function App() {
         </div>
       </section>
 
+      {/* Ubicación y Mapa */}
+      <section id="ubicacion" className="py-24 bg-[#0a0a0a] border-t border-white/5 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#D71920]/5 via-transparent to-transparent opacity-50" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-[#D71920] font-bold tracking-wider text-sm mb-4 block">DÓNDE ENCONTRARNOS</span>
+              <h2 className="text-4xl font-bold mb-6 text-white">Visita nuestro taller</h2>
+              <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+                Estamos ubicados en un punto estratégico de Medellín para brindarte el mejor servicio. Trae tu vehículo y recibe una asesoría técnica especializada.
+              </p>
+              
+              <div className="flex items-start gap-4 bg-[#111111] p-6 rounded-2xl border border-white/5 mb-8">
+                <div className="bg-[#D71920]/10 p-4 rounded-xl shrink-0">
+                  <MapPin className="text-[#D71920]" size={32} />
+                </div>
+                <div>
+                  <h3 className="text-white font-bold text-xl mb-2">Sede Principal</h3>
+                  <p className="text-gray-400 mb-1">Carrera 50 #70-08</p>
+                  <p className="text-gray-400">Barrio Lovaina, Medellín</p>
+                </div>
+              </div>
+              
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Carrera+50+%2370-08+barrio+Lovaina+Medellin" 
+                target="_blank" 
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1"
+              >
+                <MapPin size={20} />
+                <span>Llévame allí (Google Maps)</span>
+              </a>
+            </div>
+            
+            <div className="h-[400px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+              <iframe 
+                src="https://maps.google.com/maps?q=Carrera%2050%2370-08%20barrio%20Lovaina%20Medellin&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={false} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 grayscale contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-[#111111] border-t border-white/10 pt-16 pb-8">
+      <footer className="bg-[#050505] pt-20 pb-10 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-2">
@@ -390,21 +442,25 @@ function App() {
             </div>
             
             <div>
-              <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Contacto Directo</h4>
+              <h4 className="text-white font-bold mb-6 tracking-wider">CONTACTO</h4>
               <ul className="space-y-4">
                 <li>
-                  <a href="tel:+573000000000" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
-                    <Phone size={18} className="text-[#D71920]" />
-                    +57 300 000 0000
+                  <a href={whatsappUrl} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
+                    <WhatsAppIcon size={18} />
+                    <span>Línea Principal: 315 768 7743</span>
                   </a>
                 </li>
-                <li className="flex items-center gap-3 text-gray-400">
-                  <MapPin size={18} className="text-[#D71920]" />
-                  Medellín, Antioquia
+                <li>
+                  <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
+                    <WhatsAppIcon size={18} />
+                    <span>Línea Alterna: 304 610 6795</span>
+                  </a>
                 </li>
-                <li className="flex items-center gap-3 text-gray-400">
-                  <Clock size={18} className="text-[#D71920]" />
-                  Lun - Sáb: 8:00 AM - 6:00 PM
+                <li>
+                  <a href="mailto:Aura_kristina79@hotmail.com" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
+                    <Mail size={18} />
+                    <span className="break-all">Aura_kristina79@hotmail.com</span>
+                  </a>
                 </li>
               </ul>
             </div>
