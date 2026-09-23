@@ -76,8 +76,8 @@ const Problems = [
 function App() {
   const [videoEnded, setVideoEnded] = useState(false);
   const [showWaMenu, setShowWaMenu] = useState(false);
-  const whatsappUrl = "https://wa.me/573157687743?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
-  const whatsappUrl2 = "https://wa.me/573046106795?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
+  const whatsappUrl = "https://wa.me/573046106795?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
+  const whatsappUrl2 = "https://wa.me/573157687743?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
@@ -446,13 +446,13 @@ function App() {
                 <li>
                   <a href={whatsappUrl} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
                     <WhatsAppIcon size={18} />
-                    <span>Línea Principal: 315 768 7743</span>
+                    <span>Línea Principal: 304 610 6795</span>
                   </a>
                 </li>
                 <li>
                   <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
                     <WhatsAppIcon size={18} />
-                    <span>Línea Alterna: 304 610 6795</span>
+                    <span>Línea Alterna: 315 768 7743</span>
                   </a>
                 </li>
                 <li>
@@ -535,7 +535,7 @@ function App() {
                  </div>
                  <div className="flex flex-col">
                     <span className="text-white font-bold">Línea Principal</span>
-                    <span className="text-gray-400 text-sm">315 768 7743</span>
+                    <span className="text-gray-400 text-sm">304 610 6795</span>
                  </div>
                </a>
                <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl active:bg-white/10 transition-colors border border-white/5">
@@ -544,7 +544,7 @@ function App() {
                  </div>
                  <div className="flex flex-col">
                     <span className="text-white font-bold">Línea Alterna</span>
-                    <span className="text-gray-400 text-sm">304 610 6795</span>
+                    <span className="text-gray-400 text-sm">315 768 7743</span>
                  </div>
                </a>
              </div>
