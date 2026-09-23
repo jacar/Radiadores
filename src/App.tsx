@@ -488,7 +488,9 @@ function App() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-gray-500 text-sm">
             <p>© {new Date().getFullYear()} Radiadores Medellín A&D. Todos los derechos reservados.</p>
-            <p className="mt-2 md:mt-0">Diseñado con estándares de alta calidad y rendimiento.</p>
+            <p className="mt-2 md:mt-0 flex items-center gap-1">
+              Desarrollo: <a href="https://www.jacomeovalle.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white font-bold transition-colors">WEBCINCODEV</a>
+            </p>
           </div>
         </div>
       </footer>
