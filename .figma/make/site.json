@@ -1,7 +1,8 @@
 {
-  "description": "Transforms JSON data into a fully functional web page, enabling users to visualize and interact with structured information effortlessly.",
+  "title": "Radiadores Medellín A&D | Reparación y Fabricación",
+  "description": "Taller especializado en radiadores en Medellín. Reparación, mantenimiento, fabricación en aluminio a medida, soldadura especial y aire acondicionado automotriz.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
