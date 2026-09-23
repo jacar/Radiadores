@@ -86,7 +86,9 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center md:justify-between items-center py-2">
             <div className="flex-shrink-0 flex flex-col md:flex-row items-center gap-1 md:gap-4">
-              <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-16 lg:h-20 w-auto transition-all drop-shadow-md" />
+              <a href="#">
+                <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-16 lg:h-20 w-auto transition-all drop-shadow-md hover:scale-105" />
+              </a>
               <div className="text-white font-mono font-bold text-xs md:text-sm lg:text-base flex flex-col items-center">
                  <span className="hidden md:inline-block overflow-hidden whitespace-nowrap border-r-2 border-[#D71920] pr-1 animate-typing-text">
                    304 610 6795 / 315 768 7743
@@ -441,7 +443,9 @@ function App() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-2">
               <div className="flex items-center gap-2 mb-6">
-                <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-16 w-auto grayscale brightness-200 opacity-80" />
+                <a href="#">
+                  <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-16 w-auto grayscale brightness-200 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" />
+                </a>
               </div>
               <p className="text-gray-400 mb-6 max-w-sm">
                 Taller especializado en radiadores, fabricación en aluminio, soldaduras especiales y aire acondicionado automotriz en Medellín, Colombia.
