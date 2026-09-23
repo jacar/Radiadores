@@ -85,8 +85,16 @@ function App() {
       <nav className="fixed w-full z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center md:justify-between items-center py-2">
-            <div className="flex-shrink-0 flex items-center">
+            <div className="flex-shrink-0 flex flex-col md:flex-row items-center gap-1 md:gap-4">
               <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-16 lg:h-20 w-auto transition-all drop-shadow-md" />
+              <div className="text-white font-mono font-bold text-xs md:text-sm lg:text-base flex flex-col items-center">
+                 <span className="hidden md:inline-block overflow-hidden whitespace-nowrap border-r-2 border-[#D71920] pr-1 animate-typing-text">
+                   304 610 6795 / 315 768 7743
+                 </span>
+                 <span className="md:hidden text-[#D71920] tracking-widest mt-1">
+                   304 610 6795 / 315 768 7743
+                 </span>
+              </div>
             </div>
             <div className="hidden md:flex space-x-8 items-center ml-auto">
               <a href="#problema" className="text-gray-300 hover:text-white transition-colors">¿Problemas?</a>
