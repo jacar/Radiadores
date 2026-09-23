@@ -136,9 +136,9 @@ function App() {
                 <span className="text-gray-300 font-medium text-sm tracking-wide">Taller especializado en Medellín</span>
               </div>
               
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
-                Soluciones expertas en <br />
-                <span className="text-shiny-effect drop-shadow-[0_0_15px_rgba(215,25,32,0.8)]">radiadores y A/C</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
+                SOLUCIONES EXPERTAS EN RADIADORES <br />
+                <span className="text-shiny-effect drop-shadow-[0_0_15px_rgba(215,25,32,0.8)]">Radiadores medellin A&D</span>
               </h1>
               
               <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] font-medium">
