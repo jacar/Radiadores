@@ -39,22 +39,22 @@ const Services = [
   },
   {
     title: "Radiadores en Aluminio",
-    desc: "Fabricación y reparación especializada utilizando aluminio de alta calidad y soldadura TIG.",
+    desc: "Fabricacion y reparacion especializada utilizando aluminio de alta calidad y soldadura TIG.",
     icon: Settings
   },
   {
     title: "Aire Acondicionado",
-    desc: "Diagnóstico completo, carga de gas y reparación de sistemas de aire acondicionado automotriz.",
+    desc: "Diagnostico completo, carga de gas y reparacion de sistemas de aire acondicionado automotriz.",
     icon: Snowflake
   },
   {
-    title: "Reparación de Radiadores",
-    desc: "Diagnóstico y reparación de fugas, daños estructurales y obstrucciones internas.",
+    title: "Reparacion de Radiadores",
+    desc: "Diagnostico y reparacion de fugas, daños estructurales y obstrucciones internas.",
     icon: Flame
   },
   {
     title: "Soldadura de Tanques",
-    desc: "Trabajos especializados de reparación y soldadura de tanques de gasolina con protocolos de seguridad.",
+    desc: "Trabajos especializados de reparacion y soldadura de tanques de gasolina con protocolos de seguridad.",
     icon: ShieldCheck
   },
   {
@@ -65,10 +65,10 @@ const Services = [
 ];
 
 const Problems = [
-  "El carro se está calentando constantemente",
+  "El carro se esta calentando constantemente",
   "El radiador presenta fugas o goteos",
-  "El tanque del radiador está agrietado o dañado",
-  "El aire acondicionado dejó de enfriar",
+  "El tanque del radiador esta agrietado o dañado",
+  "El aire acondicionado dejo de enfriar",
   "Necesitas fabricar un radiador a medida",
   "Requieres soldadura especializada en aluminio"
 ];
@@ -76,8 +76,8 @@ const Problems = [
 function App() {
   const [videoEnded, setVideoEnded] = useState(false);
   const [showWaMenu, setShowWaMenu] = useState(false);
-  const whatsappUrl = "https://wa.me/573046106795?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
-  const whatsappUrl2 = "https://wa.me/573157687743?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
+  const whatsappUrl = "https://wa.me/573046106795?text=Hola,%20encontre%20Radiadores%20Medellín%20A&D%20y%20necesito%20informacion%20sobre%20un%20servicio%20para%20mi%20vehiculo.";
+  const whatsappUrl2 = "https://wa.me/573157687743?text=Hola,%20encontre%20Radiadores%20Medellín%20A&D%20y%20necesito%20informacion%20sobre%20un%20servicio%20para%20mi%20vehiculo.";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
@@ -101,7 +101,7 @@ function App() {
             <div className="hidden md:flex space-x-8 items-center ml-auto">
               <a href="#problema" className="text-gray-300 hover:text-white transition-colors">¿Problemas?</a>
               <a href="#servicios" className="text-gray-300 hover:text-white transition-colors">Servicios</a>
-              <a href="#fabricacion" className="text-gray-300 hover:text-white transition-colors">Fabricación</a>
+              <a href="#fabricacion" className="text-gray-300 hover:text-white transition-colors">Fabricacion</a>
               <a href="#galeria" className="text-gray-300 hover:text-white transition-colors">Trabajos</a>
               <a href="#nosotros" className="text-gray-300 hover:text-white transition-colors">Nosotros</a>
               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="bg-[#D71920] hover:bg-[#b0151a] text-white px-6 py-2 rounded font-medium transition-colors">
@@ -140,11 +140,11 @@ function App() {
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
                 SOLUCIONES EXPERTAS EN RADIADORES <br />
-                <span className="text-shiny-effect drop-shadow-[0_0_15px_rgba(215,25,32,0.8)]">Radiadores medellin A&D</span>
+                <span className="text-shiny-effect drop-shadow-[0_0_15px_rgba(215,25,32,0.8)]">Radiadores medellín A&D</span>
               </h1>
               
               <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] font-medium">
-                Reparación, fabricación a medida en aluminio y soldadura automotriz. Calidad industrial, durabilidad comprobada y el mejor respaldo técnico para tu vehículo.
+                Reparacion, fabricacion a medida en aluminio y soldadura automotriz. Calidad industrial, durabilidad comprobada y el mejor respaldo tecnico para tu vehiculo.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
@@ -167,14 +167,14 @@ function App() {
                  <div className="relative z-10">
                    <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                       <Award className="text-[#D71920]" size={24} />
-                      Garantía de Calidad
+                      Garantia de Calidad
                    </h3>
                    <ul className="space-y-4">
                      {[
-                       "Diagnóstico preciso y honesto",
+                       "Diagnostico preciso y honesto",
                        "Soldadura 100% garantizada",
                        "Materiales de alta resistencia",
-                       "Atención rápida en Medellín"
+                       "Atencion rapida en Medellín"
                      ].map((item, i) => (
                        <li key={i} className="flex items-center gap-3 text-gray-300 font-medium">
                          <div className="w-6 h-6 rounded-full bg-[#D71920]/20 flex items-center justify-center flex-shrink-0 text-[#D71920]">
@@ -204,11 +204,11 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D71920]/10 text-[#D71920] mb-6 text-sm font-bold">
-                <AlertTriangle size={16} /> DIAGNÓSTICO
+                <AlertTriangle size={16} /> DIAGNOSTICO
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">¿Qué problema presenta tu vehículo?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">¿Que problema presenta tu vehiculo?</h2>
               <p className="text-gray-400 mb-8 text-lg">
-                El sistema de refrigeración es vital para la vida útil de tu motor. Ignorar las fallas puede resultar en daños costosos. Nosotros diagnosticamos y resolvemos estos problemas:
+                El sistema de refrigeracion es vital para la vida util de tu motor. Ignorar las fallas puede resultar en daños costosos. Nosotros diagnosticamos y resolvemos estos problemas:
               </p>
               <ul className="space-y-4">
                 {Problems.map((prob, idx) => (
@@ -222,7 +222,7 @@ function App() {
             <div className="bg-[#1a1a1a] p-8 rounded-2xl border border-white/5 shadow-xl relative overflow-hidden">
                <div className="absolute top-0 right-0 w-32 h-32 bg-[#D71920]/10 blur-3xl rounded-full" />
                <h3 className="text-2xl font-bold text-white mb-4">Evita daños mayores en tu motor</h3>
-               <p className="text-gray-400 mb-6">Envíanos una foto o video de tu radiador por WhatsApp y recibe una evaluación inicial sin compromiso.</p>
+               <p className="text-gray-400 mb-6">Envianos una foto o video de tu radiador por WhatsApp y recibe una evaluacion inicial sin compromiso.</p>
                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-4 rounded font-bold transition-all">
                 <Camera size={20} />
                 Enviar foto por WhatsApp
@@ -236,9 +236,9 @@ function App() {
       <section id="servicios" className="py-24 bg-[#0a0a0a] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-white">Soluciones integrales para tu vehículo</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">Soluciones integrales para tu vehiculo</h2>
             <p className="text-gray-400 text-lg">
-              Contamos con la experiencia y tecnología para reparar, fabricar y mantener los sistemas de enfriamiento.
+              Contamos con la experiencia y tecnologia para reparar, fabricar y mantener los sistemas de enfriamiento.
             </p>
           </div>
 
@@ -267,24 +267,24 @@ function App() {
               <span className="text-[#D71920] font-bold tracking-wider text-sm mb-4 block">HECHO A MEDIDA</span>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Fabricamos radiadores totalmente en aluminio</h2>
               <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                Cuando las refacciones originales no son suficientes o buscas mayor rendimiento, desarrollamos radiadores en aluminio personalizados. Ideales para vehículos clásicos, de competencia, maquinaria pesada o modificaciones especiales.
+                Cuando las refacciones originales no son suficientes o buscas mayor rendimiento, desarrollamos radiadores en aluminio personalizados. Ideales para vehiculos clasicos, de competencia, maquinaria pesada o modificaciones especiales.
               </p>
               
               <div className="grid sm:grid-cols-2 gap-6 mb-8">
                 <div className="bg-[#1a1a1a] p-5 rounded-xl border border-white/5">
                    <ShieldCheck className="text-[#D71920] mb-3" size={28} />
                    <h4 className="text-white font-bold mb-2">Mayor durabilidad</h4>
-                   <p className="text-sm text-gray-400">Soldaduras 100% en aluminio, sin plásticos que se tuesten.</p>
+                   <p className="text-sm text-gray-400">Soldaduras 100% en aluminio, sin plasticos que se tuesten.</p>
                 </div>
                 <div className="bg-[#1a1a1a] p-5 rounded-xl border border-white/5">
                    <Thermometer className="text-[#D71920] mb-3" size={28} />
                    <h4 className="text-white font-bold mb-2">Mejor enfriamiento</h4>
-                   <p className="text-sm text-gray-400">Diseños de paneles optimizados para máxima transferencia térmica.</p>
+                   <p className="text-sm text-gray-400">Diseños de paneles optimizados para maxima transferencia termica.</p>
                 </div>
               </div>
 
               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#b0151a] text-white px-8 py-4 rounded font-bold transition-all">
-                Cotizar fabricación a medida
+                Cotizar fabricacion a medida
               </a>
             </div>
             <div className="relative">
@@ -302,14 +302,14 @@ function App() {
              <div className="relative z-10">
                <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
                  <Snowflake className="text-[#D71920]" size={32} />
-                 ¿Tu aire acondicionado no enfría?
+                 ¿Tu aire acondicionado no enfria?
                </h3>
                <p className="text-gray-400 text-lg max-w-2xl">
-                 Revisamos fugas, reparamos compresores, cambiamos evaporadores y realizamos cargas de gas con equipos de precisión. Recupera el confort en tu cabina.
+                 Revisamos fugas, reparamos compresores, cambiamos evaporadores y realizamos cargas de gas con equipos de precision. Recupera el confort en tu cabina.
                </p>
              </div>
              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex-shrink-0 bg-white text-[#0a0a0a] hover:bg-gray-200 px-8 py-4 rounded font-bold transition-all shadow-lg relative z-10 whitespace-nowrap">
-               Agendar revisión
+               Agendar revision
              </a>
            </div>
         </div>
@@ -319,18 +319,18 @@ function App() {
       <section id="nosotros" className="py-24 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-white">Por qué elegirnos en Medellín</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">Por que elegirnos en Medellín</h2>
             <p className="text-gray-400 text-lg">
-              Años de experiencia combinados con técnicas modernas de soldadura y diagnóstico nos permiten garantizar cada trabajo.
+              Años de experiencia combinados con tecnicas modernas de soldadura y diagnostico nos permiten garantizar cada trabajo.
             </p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: Users, title: "Atención Especializada", desc: "Trato directo y honesto" },
-              { icon: Settings, title: "Taller Equipado", desc: "Herramientas de precisión" },
-              { icon: ShieldCheck, title: "Trabajos Garantizados", desc: "Respaldo en cada reparación" },
-              { icon: Award, title: "Experiencia Técnica", desc: "Expertos en aluminio" }
+              { icon: Users, title: "Atencion Especializada", desc: "Trato directo y honesto" },
+              { icon: Settings, title: "Taller Equipado", desc: "Herramientas de precision" },
+              { icon: ShieldCheck, title: "Trabajos Garantizados", desc: "Respaldo en cada reparacion" },
+              { icon: Award, title: "Experiencia Tecnica", desc: "Expertos en aluminio" }
             ].map((feature, idx) => (
               <div key={idx} className="p-6">
                 <div className="w-16 h-16 mx-auto bg-[#1a1a1a] rounded-full flex items-center justify-center mb-6 border border-white/5 shadow-[0_0_15px_rgba(215,25,32,0.1)]">
@@ -366,7 +366,7 @@ function App() {
            
            <div className="mt-12">
               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-white bg-[#1a1a1a] px-8 py-4 rounded font-bold border border-white/10 hover:bg-[#222] transition-colors">
-                 Ver más en nuestro WhatsApp
+                 Ver mas en nuestro WhatsApp
               </a>
            </div>
         </div>
@@ -378,7 +378,7 @@ function App() {
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">¿Necesitas reparar tu radiador hoy?</h2>
           <p className="text-xl text-gray-400 mb-10">
-            No dejes que un problema de temperatura deje tu vehículo inoperativo. Contáctanos ahora y recibe atención experta.
+            No dejes que un problema de temperatura deje tu vehiculo inoperativo. Contactanos ahora y recibe atencion experta.
           </p>
           <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#b0151a] text-white px-10 py-5 rounded-lg font-bold text-xl transition-all shadow-xl shadow-[#D71920]/20">
             <MessageCircle size={24} />
@@ -387,16 +387,16 @@ function App() {
         </div>
       </section>
 
-      {/* Ubicación y Mapa */}
+      {/* Ubicacion y Mapa */}
       <section id="ubicacion" className="py-24 bg-[#0a0a0a] border-t border-white/5 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#D71920]/5 via-transparent to-transparent opacity-50" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-[#D71920] font-bold tracking-wider text-sm mb-4 block">DÓNDE ENCONTRARNOS</span>
+              <span className="text-[#D71920] font-bold tracking-wider text-sm mb-4 block">DONDE ENCONTRARNOS</span>
               <h2 className="text-4xl font-bold mb-6 text-white">Visita nuestro taller</h2>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
-                Estamos ubicados en un punto estratégico de Medellín para brindarte el mejor servicio. Trae tu vehículo y recibe una asesoría técnica especializada.
+                Estamos ubicados en un punto estrategico de Medellín para brindarte el mejor servicio. Trae tu vehiculo y recibe una asesoria tecnica especializada.
               </p>
               
               <div className="flex items-start gap-4 bg-[#111111] p-6 rounded-2xl border border-white/5 mb-8">
@@ -411,19 +411,19 @@ function App() {
               </div>
               
               <a 
-                href="https://www.google.com/maps/search/?api=1&query=Carrera+50+%2370-08+barrio+Lovaina+Medellin" 
+                href="https://www.google.com/maps/search/?api=1&query=Carrera+50+%2370-08+barrio+Lovaina+Medellín" 
                 target="_blank" 
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1"
               >
                 <MapPin size={20} />
-                <span>Llévame allí (Google Maps)</span>
+                <span>Llevame alli (Google Maps)</span>
               </a>
             </div>
             
             <div className="h-[400px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
               <iframe 
-                src="https://maps.google.com/maps?q=Carrera%2050%2370-08%20barrio%20Lovaina%20Medellin&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                src="https://maps.google.com/maps?q=Carrera%2050%2370-08%20barrio%20Lovaina%20Medellín&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
@@ -448,7 +448,7 @@ function App() {
                 </a>
               </div>
               <p className="text-gray-400 mb-6 max-w-sm">
-                Taller especializado en radiadores, fabricación en aluminio, soldaduras especiales y aire acondicionado automotriz en Medellín, Colombia.
+                Taller especializado en radiadores, fabricacion en aluminio, soldaduras especiales y aire acondicionado automotriz en Medellín, Colombia.
               </p>
             </div>
             
@@ -458,13 +458,13 @@ function App() {
                 <li>
                   <a href={whatsappUrl} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
                     <WhatsAppIcon size={18} />
-                    <span>Línea Principal: 304 610 6795</span>
+                    <span>Linea Principal: 304 610 6795</span>
                   </a>
                 </li>
                 <li>
                   <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
                     <WhatsAppIcon size={18} />
-                    <span>Línea Alterna: 315 768 7743</span>
+                    <span>Linea Alterna: 315 768 7743</span>
                   </a>
                 </li>
                 <li>
@@ -477,11 +477,11 @@ function App() {
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Navegación</h4>
+              <h4 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Navegacion</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#problema" className="hover:text-[#D71920] transition-colors">Diagnóstico</a></li>
+                <li><a href="#problema" className="hover:text-[#D71920] transition-colors">Diagnostico</a></li>
                 <li><a href="#servicios" className="hover:text-[#D71920] transition-colors">Servicios</a></li>
-                <li><a href="#fabricacion" className="hover:text-[#D71920] transition-colors">Fabricación a medida</a></li>
+                <li><a href="#fabricacion" className="hover:text-[#D71920] transition-colors">Fabricacion a medida</a></li>
                 <li><a href="#nosotros" className="hover:text-[#D71920] transition-colors">Nosotros</a></li>
               </ul>
             </div>
@@ -497,19 +497,19 @@ function App() {
 
       {/* Floating WhatsApp CTA (Desktop only) */}
       <div className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end group">
-        {/* Menú emergente de WhatsApp */}
+        {/* Menu emergente de WhatsApp */}
         <div className="mb-4 bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-2xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col gap-2 min-w-[220px]">
-          <p className="text-white text-sm font-bold px-2 pb-2 border-b border-white/10 mb-1">¿Con quién deseas chatear?</p>
+          <p className="text-white text-sm font-bold px-2 pb-2 border-b border-white/10 mb-1">¿Con quien deseas chatear?</p>
           <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-xl transition-colors">
             <WhatsAppIcon size={20} className="text-[#25D366]" />
-            <span className="text-gray-200 text-sm font-medium">Línea Principal</span>
+            <span className="text-gray-200 text-sm font-medium">Linea Principal</span>
           </a>
           <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-xl transition-colors">
             <WhatsAppIcon size={20} className="text-[#25D366]" />
-            <span className="text-gray-200 text-sm font-medium">Línea Alterna</span>
+            <span className="text-gray-200 text-sm font-medium">Linea Alterna</span>
           </a>
         </div>
-        {/* Botón Flotante */}
+        {/* Boton Flotante */}
         <div className="bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_14px_rgba(37,211,102,0.4)] cursor-pointer hover:scale-110 transition-transform flex items-center justify-center">
           <WhatsAppIcon size={32} />
         </div>
@@ -537,18 +537,18 @@ function App() {
         </a>
       </div>
 
-      {/* Menú Modal WhatsApp (Móvil) */}
+      {/* Menu Modal WhatsApp (Movil) */}
       {showWaMenu && (
         <div className="md:hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-end justify-center pb-24 px-4" onClick={() => setShowWaMenu(false)}>
            <div className="bg-[#111111] w-full rounded-3xl p-5 border border-white/10 shadow-2xl animate-fade-in-up" onClick={e => e.stopPropagation()}>
-             <h3 className="text-white font-bold mb-4 text-lg text-center">¿Con quién deseas chatear?</h3>
+             <h3 className="text-white font-bold mb-4 text-lg text-center">¿Con quien deseas chatear?</h3>
              <div className="flex flex-col gap-3">
                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl active:bg-white/10 transition-colors border border-white/5">
                  <div className="bg-[#25D366]/20 p-2 rounded-full">
                     <WhatsAppIcon size={28} className="text-[#25D366]" />
                  </div>
                  <div className="flex flex-col">
-                    <span className="text-white font-bold">Línea Principal</span>
+                    <span className="text-white font-bold">Linea Principal</span>
                     <span className="text-gray-400 text-sm">304 610 6795</span>
                  </div>
                </a>
@@ -557,7 +557,7 @@ function App() {
                     <WhatsAppIcon size={28} className="text-[#25D366]" />
                  </div>
                  <div className="flex flex-col">
-                    <span className="text-white font-bold">Línea Alterna</span>
+                    <span className="text-white font-bold">Linea Alterna</span>
                     <span className="text-gray-400 text-sm">315 768 7743</span>
                  </div>
                </a>
