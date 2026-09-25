@@ -140,7 +140,7 @@ function App() {
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
                 SOLUCIONES EXPERTAS EN RADIADORES <br />
-                <span className="text-shiny-effect drop-shadow-[0_0_15px_rgba(215,25,32,0.8)]">Radiadores medellin A&D</span>
+                <span className="text-shiny-effect drop-shadow-[0_0_15px_rgba(215,25,32,0.8)]">Radiadores medellín A&D</span>
               </h1>
               
               <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] font-medium">
