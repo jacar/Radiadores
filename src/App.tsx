@@ -91,10 +91,10 @@ function App() {
               </a>
               <div className="text-white font-mono font-bold text-xs md:text-sm lg:text-base flex flex-col items-center">
                  <span className="hidden md:inline-block overflow-hidden whitespace-nowrap border-r-2 border-[#D71920] pr-1 animate-typing-text">
-                   304 610 6795 / 315 768 7743
+                   304 610 6795
                  </span>
                  <span className="md:hidden text-[#D71920] tracking-widest mt-1">
-                   304 610 6795 / 315 768 7743
+                   304 610 6795
                  </span>
               </div>
             </div>
@@ -152,7 +152,7 @@ function App() {
                   <WhatsAppIcon size={24} />
                   <span>Cotizar servicio urgente</span>
                 </a>
-                <a href="tel:+573157687743" className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:-translate-y-1">
+                <a href="tel:+573046106795" className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:-translate-y-1">
                   <Phone size={24} />
                   <span>Llamar ahora</span>
                 </a>
@@ -521,7 +521,7 @@ function App() {
           <Home size={22} />
           <span className="text-[10px] font-medium uppercase tracking-wider">Inicio</span>
         </a>
-        <a href="tel:+573157687743" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors flex-1">
+        <a href="tel:+573046106795" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors flex-1">
           <Phone size={22} />
           <span className="text-[10px] font-medium uppercase tracking-wider">Llamar</span>
         </a>
