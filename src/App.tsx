@@ -30,6 +30,8 @@ const WhatsAppIcon = ({ size = 24, className = "" }) => (
 import logoUrl from './logo.png';
 import videoHeroUrl from './videohero.mp4';
 import headerImgUrl from './header.png';
+import img1Url from './1.jpeg';
+import img2Url from './2.jpeg';
 
 const Services = [
   {
@@ -350,6 +352,14 @@ function App() {
            <span className="text-[#D71920] font-bold tracking-wider text-sm mb-4 block">NUESTROS TRABAJOS</span>
            <h2 className="text-4xl font-bold mb-12 text-white">Resultados comprobados</h2>
            
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+             {[img1Url, img2Url].map((url, idx) => (
+                <div key={idx} className="aspect-video bg-[#1a1a1a] rounded-xl border border-white/5 overflow-hidden group">
+                  <img src={url} alt={`Trabajo realizado ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+             ))}
+           </div>
+
            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
              {[
                "https://www.radiadorescopar.com/wp-content/uploads/2022/01/Mantenimiento-de-radiadores-y-tanques.jpg",
@@ -359,7 +369,7 @@ function App() {
                "https://thermecs.co/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqm9arff4%2Fimage%2Fupload%2Fv1768855830%2Fbenefits_radiadores_top_img_8eae236749.png&w=3840&q=75"
              ].map((url, idx) => (
                 <div key={idx} className="aspect-square bg-[#1a1a1a] rounded-lg border border-white/5 overflow-hidden group">
-                  <img src={url} alt={`Trabajo realizado ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <img src={url} alt={`Trabajo realizado ${idx + 3}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
              ))}
            </div>
