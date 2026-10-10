@@ -32,6 +32,7 @@ import videoHeroUrl from './videohero.mp4';
 import headerImgUrl from './header.png';
 import img1Url from './1.jpeg';
 import img2Url from './2.jpeg';
+import { SuspensionOverlay } from './SuspensionOverlay';
 
 const Services = [
   {
@@ -83,6 +84,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
+      {/* Capa de suspensión / control de pago con reversión para admin */}
+      <SuspensionOverlay defaultPin="admin2026" />
+
       {/* Navigation */}
       <nav className="fixed w-full z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
