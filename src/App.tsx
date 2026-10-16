@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { 
   Wrench, 
   Thermometer, 
@@ -9,6 +9,14 @@ import {
   Clock, 
   CheckCircle2,
   ChevronRight,
+  ChevronLeft,
+  X,
+  ZoomIn,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Video,
   ShieldCheck,
   AlertTriangle,
   Snowflake,
@@ -18,7 +26,9 @@ import {
   Camera,
   Home,
   Grid,
-  Mail
+  Mail,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
@@ -32,7 +42,59 @@ import videoHeroUrl from './videohero.mp4';
 import headerImgUrl from './header.png';
 import img1Url from './1.jpeg';
 import img2Url from './2.jpeg';
-import { SuspensionOverlay } from './SuspensionOverlay';
+
+import galeria1 from './galeria/1.jpg';
+import galeria2 from './galeria/2.jpg';
+import galeria3 from './galeria/3.jpg';
+import galeria4 from './galeria/4.jpg';
+import galeria5 from './galeria/5.jpg';
+import galeria6 from './galeria/6.jpg';
+import galeria7 from './galeria/7.jpg';
+import galeria8 from './galeria/8.jpg';
+
+import videoGaleria1 from './galeria/radiadores.mp4';
+import videoGaleria2 from './galeria/radiadores (1).mp4';
+import videoGaleria3 from './galeria/radiadores (2).mp4';
+import audioTrackUrl from './galeria/mickeyscat-adrenaline-619396.mp3';
+
+const videoGalleryItems = [
+  {
+    src: videoGaleria1,
+    title: "Mantenimiento y Reparación de Radiadores",
+    category: "Procesos en Taller",
+    desc: "Diagnóstico profundo de temperatura, sondeo especializado y sellado de alta resistencia."
+  },
+  {
+    src: videoGaleria2,
+    title: "Soldadura Especial TIG en Aluminio",
+    category: "Soldadura de Precisión",
+    desc: "Acabados reforzados y fabricación de tanques en aluminio con máxima durabilidad."
+  },
+  {
+    src: videoGaleria3,
+    title: "Pruebas Hidrostáticas y Control de Fugas",
+    category: "Garantía de Calidad",
+    desc: "Comprobación estricta bajo presión de cada radiador para certificar 100% de hermeticidad."
+  }
+];
+
+const featuredGallery = [
+  { src: img1Url, alt: "Fabricación y adaptación de radiadores en aluminio", title: "Fabricación a Medida en Aluminio" },
+  { src: img2Url, alt: "Reparación técnica y mantenimiento especializado", title: "Reparación Especializada y Mantenimiento" }
+];
+
+const gridGallery = [
+  { src: galeria1, alt: "Reparación y mantenimiento de radiadores en Medellín", title: "Mantenimiento Integral de Radiadores" },
+  { src: galeria2, alt: "Fabricación de tanques de radiador en aluminio", title: "Tanques de Radiador en Aluminio Soldado" },
+  { src: galeria3, alt: "Soldadura especializada de precisión TIG", title: "Soldadura TIG de Alta Resistencia" },
+  { src: galeria4, alt: "Inspección técnica de sistema de enfriamiento automotriz", title: "Diagnóstico del Sistema de Refrigeración" },
+  { src: galeria5, alt: "Servicio de carga y reparación de aire acondicionado", title: "Servicio y Carga de Aire Acondicionado" },
+  { src: galeria6, alt: "Sondeo y limpieza profunda de panales de radiador", title: "Sondeo y Limpieza Interna de Panales" },
+  { src: galeria7, alt: "Soldadura de tanques y componentes de aluminio", title: "Reparación y Soldadura de Tanques" },
+  { src: galeria8, alt: "Pruebas de presión y diagnóstico de fugas", title: "Pruebas Hidrostáticas de Presión" },
+];
+
+const allGalleryImages = [...featuredGallery, ...gridGallery];
 
 const Services = [
   {
@@ -77,42 +139,211 @@ const Problems = [
 ];
 
 function App() {
+  // Estado para Modo Oscuro (Dark) y Modo Claro (Light)
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const saved = localStorage.getItem('site_theme');
+    return (saved === 'light' || saved === 'dark') ? saved : 'dark';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'light') {
+      root.classList.add('light');
+      root.classList.remove('dark');
+    } else {
+      root.classList.add('dark');
+      root.classList.remove('light');
+    }
+    localStorage.setItem('site_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   const [videoEnded, setVideoEnded] = useState(false);
   const [showWaMenu, setShowWaMenu] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState<number | null>(null);
+
+  // Estados para el Carrusel de Videos Autoplay
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
+  const videoPlayerRef = useRef<HTMLVideoElement>(null);
+  const audioPlayerRef = useRef<HTMLAudioElement>(null);
+
   const whatsappUrl = "https://wa.me/573046106795?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
   const whatsappUrl2 = "https://wa.me/573157687743?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
 
+  // Reproducir automáticamente al cambiar de video
+  useEffect(() => {
+    if (videoPlayerRef.current) {
+      videoPlayerRef.current.currentTime = 0;
+      videoPlayerRef.current.play().then(() => {
+        setIsVideoPlaying(true);
+      }).catch(() => {
+        if (videoPlayerRef.current) {
+          videoPlayerRef.current.muted = true;
+          setIsVideoMuted(true);
+          videoPlayerRef.current.play().catch(() => {});
+        }
+      });
+    }
+    setVideoProgress(0);
+  }, [activeVideoIndex]);
+
+  // Al finalizar el video, pasar automáticamente al siguiente (Autoplay loop continuo)
+  const handleVideoEnded = () => {
+    setActiveVideoIndex((prev) => (prev + 1) % videoGalleryItems.length);
+  };
+
+  // Actualizar barra de progreso del video
+  const handleTimeUpdate = () => {
+    if (videoPlayerRef.current && videoPlayerRef.current.duration) {
+      const pct = (videoPlayerRef.current.currentTime / videoPlayerRef.current.duration) * 100;
+      setVideoProgress(pct);
+    }
+  };
+
+  const togglePlayVideo = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (!videoPlayerRef.current) return;
+    if (videoPlayerRef.current.paused) {
+      videoPlayerRef.current.play();
+      setIsVideoPlaying(true);
+      if (isAudioPlaying && audioPlayerRef.current) {
+        audioPlayerRef.current.play().catch(() => {});
+      }
+    } else {
+      videoPlayerRef.current.pause();
+      setIsVideoPlaying(false);
+      if (audioPlayerRef.current) {
+        audioPlayerRef.current.pause();
+      }
+    }
+  };
+
+  // Alternar el audio de la carpeta (mickeyscat-adrenaline-619396.mp3)
+  const toggleAudio = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (!audioPlayerRef.current) return;
+    if (audioPlayerRef.current.paused) {
+      audioPlayerRef.current.volume = 0.75;
+      audioPlayerRef.current.play().then(() => {
+        setIsAudioPlaying(true);
+      }).catch((err) => {
+        console.log("No se pudo iniciar el audio automáticamente:", err);
+      });
+    } else {
+      audioPlayerRef.current.pause();
+      setIsAudioPlaying(false);
+    }
+  };
+
+  const handlePrevVideo = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setActiveVideoIndex((prev) => (prev === 0 ? videoGalleryItems.length - 1 : prev - 1));
+  };
+
+  const handleNextVideo = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setActiveVideoIndex((prev) => (prev + 1) % videoGalleryItems.length);
+  };
+
+  const handlePrevImage = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCarouselIndex((prev) => (prev === null ? null : (prev === 0 ? allGalleryImages.length - 1 : prev - 1)));
+  }, []);
+
+  const handleNextImage = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCarouselIndex((prev) => (prev === null ? null : (prev === allGalleryImages.length - 1 ? 0 : prev + 1)));
+  }, []);
+
+  const handleCloseCarousel = useCallback(() => {
+    setCarouselIndex(null);
+  }, []);
+
+  // Control de scroll y navegación por teclado (Esc, Flechas)
+  useEffect(() => {
+    if (carouselIndex === null) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleCloseCarousel();
+      } else if (e.key === 'ArrowLeft') {
+        handlePrevImage();
+      } else if (e.key === 'ArrowRight') {
+        handleNextImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [carouselIndex, handleCloseCarousel, handleNextImage, handlePrevImage]);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
-      {/* Capa de suspensión / control de pago con reversión para admin */}
-      <SuspensionOverlay defaultPin="admin2026" />
-
       {/* Navigation */}
       <nav className="fixed w-full z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center md:justify-between items-center py-2">
-            <div className="flex-shrink-0 flex flex-col md:flex-row items-center gap-1 md:gap-4">
+          <div className="flex justify-between items-center py-2">
+            <div className="flex-shrink-0 flex items-center gap-2 sm:gap-4">
               <a href="#">
-                <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-16 lg:h-20 w-auto transition-all drop-shadow-md hover:scale-105" />
+                <img src={logoUrl} alt="Radiadores Medellín A&D" className="h-14 sm:h-16 lg:h-20 w-auto transition-all drop-shadow-md hover:scale-105" />
               </a>
-              <div className="text-white font-mono font-bold text-xs md:text-sm lg:text-base flex flex-col items-center">
+              <div className="text-white font-mono font-bold text-xs md:text-sm lg:text-base flex flex-col items-start sm:items-center">
                  <span className="hidden md:inline-block overflow-hidden whitespace-nowrap border-r-2 border-[#D71920] pr-1 animate-typing-text">
                    304 610 6795
                  </span>
-                 <span className="md:hidden text-[#D71920] tracking-widest mt-1">
+                 <span className="md:hidden text-[#D71920] tracking-widest text-xs font-mono font-bold">
                    304 610 6795
                  </span>
               </div>
             </div>
-            <div className="hidden md:flex space-x-8 items-center ml-auto">
-              <a href="#problema" className="text-gray-300 hover:text-white transition-colors">¿Problemas?</a>
-              <a href="#servicios" className="text-gray-300 hover:text-white transition-colors">Servicios</a>
-              <a href="#fabricacion" className="text-gray-300 hover:text-white transition-colors">Fabricación</a>
-              <a href="#galeria" className="text-gray-300 hover:text-white transition-colors">Trabajos</a>
-              <a href="#nosotros" className="text-gray-300 hover:text-white transition-colors">Nosotros</a>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="bg-[#D71920] hover:bg-[#b0151a] text-white px-6 py-2 rounded font-medium transition-colors">
-                Cotizar
-              </a>
+
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                <a href="#problema" className="text-gray-300 hover:text-white transition-colors">¿Problemas?</a>
+                <a href="#servicios" className="text-gray-300 hover:text-white transition-colors">Servicios</a>
+                <a href="#fabricacion" className="text-gray-300 hover:text-white transition-colors">Fabricación</a>
+                <a href="#videos" className="text-gray-300 hover:text-white transition-colors flex items-center gap-1.5"><Video size={14} className="text-[#D71920]" /> Videos</a>
+                <a href="#galeria" className="text-gray-300 hover:text-white transition-colors">Fotos</a>
+                <a href="#nosotros" className="text-gray-300 hover:text-white transition-colors">Nosotros</a>
+                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="bg-[#D71920] hover:bg-[#b0151a] text-white px-5 py-2 rounded font-medium transition-colors">
+                  Cotizar
+                </a>
+              </div>
+
+              {/* Botón Switch Modo Claro / Modo Oscuro */}
+              <button
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+                title={theme === 'dark' ? "Cambiar a Modo Claro" : "Cambiar a Modo Oscuro"}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-gray-200 hover:text-white border border-white/10 transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun size={18} className="text-amber-400" />
+                    <span className="text-xs font-semibold">Claro</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon size={18} className="text-indigo-600" />
+                    <span className="text-xs font-semibold">Oscuro</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -350,6 +581,177 @@ function App() {
         </div>
       </section>
 
+      {/* Carrusel de Videos en Acción (Autoplay) */}
+      <section id="videos" className="py-24 bg-[#0d0d0d] border-t border-white/5 relative overflow-hidden">
+        {/* Glow de fondo atmosférico */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D71920]/10 rounded-full blur-[140px] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D71920]/10 border border-[#D71920]/30 text-[#D71920] text-xs font-bold uppercase tracking-wider mb-4">
+              <Video size={16} />
+              <span>NUESTRO TALLER EN ACCIÓN</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Mira cómo trabajamos
+            </h2>
+            <p className="text-gray-400 text-base md:text-lg">
+              Transparencia y técnica comprobada. Observa en video los procesos reales de soldadura, diagnóstico y armado en nuestra sede de Medellín.
+            </p>
+          </div>
+
+          {/* Reproductor Principal con Autoplay y Controles */}
+          <div className="max-w-5xl mx-auto">
+            <div className="relative bg-[#0a0a0a] rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(215,25,32,0.15)] group">
+              
+              {/* Contenedor del Video */}
+              <div className="relative aspect-video max-h-[580px] w-full flex items-center justify-center bg-black">
+                <video
+                  ref={videoPlayerRef}
+                  src={videoGalleryItems[activeVideoIndex].src}
+                  autoPlay
+                  muted={isVideoMuted}
+                  playsInline
+                  onEnded={handleVideoEnded}
+                  onTimeUpdate={handleTimeUpdate}
+                  className="w-full h-full object-contain"
+                />
+
+                {/* Overlay de Degradado Superior e Inferior para legibilidad */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
+
+                {/* Botón Central Grande de Play/Pause en hover */}
+                <button
+                  onClick={togglePlayVideo}
+                  aria-label={isVideoPlaying ? "Pausar video" : "Reproducir video"}
+                  className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-black/60 hover:bg-[#D71920] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all transform hover:scale-110 active:scale-95 shadow-2xl opacity-0 group-hover:opacity-100 cursor-pointer z-20"
+                >
+                  {isVideoPlaying ? <Pause size={32} /> : <Play size={32} className="ml-1" />}
+                </button>
+
+                {/* Controles Flotantes Izquierda y Derecha para cambiar video */}
+                <button
+                  onClick={handlePrevVideo}
+                  aria-label="Video anterior"
+                  className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 p-3 sm:p-4 rounded-full bg-black/70 hover:bg-[#D71920] text-white border border-white/20 transition-all hover:scale-110 active:scale-95 shadow-2xl backdrop-blur-md cursor-pointer"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+
+                <button
+                  onClick={handleNextVideo}
+                  aria-label="Video siguiente"
+                  className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 p-3 sm:p-4 rounded-full bg-black/70 hover:bg-[#D71920] text-white border border-white/20 transition-all hover:scale-110 active:scale-95 shadow-2xl backdrop-blur-md cursor-pointer"
+                >
+                  <ChevronRight size={24} />
+                </button>
+
+                {/* Badges de Información Superior */}
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20 flex items-center gap-2">
+                  <span className="bg-[#D71920] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                    {videoGalleryItems[activeVideoIndex].category}
+                  </span>
+                  <span className="hidden sm:inline-block bg-black/60 backdrop-blur-md text-gray-300 text-xs px-3 py-1 rounded-full border border-white/10">
+                    Video {activeVideoIndex + 1} de {videoGalleryItems.length}
+                  </span>
+                </div>
+
+                {/* Elemento de Audio en bucle (mickeyscat-adrenaline-619396.mp3) */}
+                <audio 
+                  ref={audioPlayerRef} 
+                  src={audioTrackUrl} 
+                  loop 
+                  preload="auto" 
+                />
+
+                {/* Botón de Sonido (Audio Track de la carpeta src/galeria) */}
+                <div className="absolute top-4 sm:top-6 right-4 sm:right-6 z-20">
+                  <button
+                    onClick={toggleAudio}
+                    aria-label={isAudioPlaying ? "Silenciar audio" : "Activar audio"}
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-full border backdrop-blur-md transition-all cursor-pointer text-xs font-semibold shadow-lg ${
+                      isAudioPlaying 
+                        ? 'bg-[#D71920] hover:bg-[#b0151a] text-white border-white/30 shadow-[0_0_15px_rgba(215,25,32,0.6)]' 
+                        : 'bg-black/70 hover:bg-black text-white border-white/20 hover:border-[#D71920]'
+                    }`}
+                  >
+                    {isAudioPlaying ? (
+                      <>
+                        <Volume2 size={16} className="text-white animate-pulse" />
+                        <span>Música activada</span>
+                      </>
+                    ) : (
+                      <>
+                        <VolumeX size={16} className="text-[#D71920]" />
+                        <span>Activar audio</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Info Inferior y Barra de Progreso */}
+                <div className="absolute bottom-0 inset-x-0 z-20 p-4 sm:p-6">
+                  {/* Barra de progreso de reproducción automática */}
+                  <div className="w-full h-1.5 bg-white/20 rounded-full mb-3 overflow-hidden">
+                    <div 
+                      className="h-full bg-[#D71920] transition-all duration-150 rounded-full shadow-[0_0_8px_#D71920]" 
+                      style={{ width: `${videoProgress}%` }}
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                    <div>
+                      <h3 className="text-lg sm:text-2xl font-bold text-white drop-shadow-md">
+                        {videoGalleryItems[activeVideoIndex].title}
+                      </h3>
+                      <p className="text-gray-300 text-xs sm:text-sm max-w-2xl drop-shadow">
+                        {videoGalleryItems[activeVideoIndex].desc}
+                      </p>
+                    </div>
+
+                    <a 
+                      href={whatsappUrl} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="inline-flex items-center gap-2 bg-[#D71920] hover:bg-[#b0151a] text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95 shrink-0 self-start sm:self-auto cursor-pointer"
+                    >
+                      <MessageCircle size={16} />
+                      <span>Consultar este trabajo</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Selector de los 3 videos (Tarjetas Interactivas con indicador activo) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+              {videoGalleryItems.map((item, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveVideoIndex(idx)}
+                  className={`text-left p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                    idx === activeVideoIndex
+                      ? 'bg-[#1a1a1a] border-[#D71920] shadow-[0_0_20px_rgba(215,25,32,0.25)] ring-1 ring-[#D71920]'
+                      : 'bg-[#111111] border-white/5 hover:border-white/20 hover:bg-[#151515] opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                      idx === activeVideoIndex ? 'bg-[#D71920] text-white' : 'bg-white/10 text-gray-400'
+                    }`}>
+                      {item.category}
+                    </span>
+                    <span className="text-xs text-gray-400 font-mono">0{idx + 1}</span>
+                  </div>
+                  <h4 className="text-white font-bold text-sm mb-1 line-clamp-1">{item.title}</h4>
+                  <p className="text-gray-400 text-xs line-clamp-2">{item.desc}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Galeria Section */}
       <section id="galeria" className="py-24 bg-[#111111] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -357,23 +759,47 @@ function App() {
            <h2 className="text-4xl font-bold mb-12 text-white">Resultados comprobados</h2>
            
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-             {[img1Url, img2Url].map((url, idx) => (
-                <div key={idx} className="aspect-video bg-[#1a1a1a] rounded-xl border border-white/5 overflow-hidden group">
-                  <img src={url} alt={`Trabajo realizado ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+             {featuredGallery.map((item, idx) => (
+                <div 
+                  key={idx} 
+                  onClick={() => setCarouselIndex(idx)}
+                  className="aspect-video bg-[#1a1a1a] rounded-xl border border-white/5 overflow-hidden group relative cursor-pointer shadow-lg hover:border-[#D71920]/40 transition-all"
+                >
+                  <img src={item.src} alt={item.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 justify-between">
+                    <div>
+                      <span className="text-[#D71920] text-xs font-bold uppercase tracking-wider block">Destacado</span>
+                      <h4 className="text-white font-bold text-lg">{item.title}</h4>
+                    </div>
+                    <div className="p-3 bg-[#D71920] rounded-full text-white shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                      <ZoomIn size={20} />
+                    </div>
+                  </div>
                 </div>
              ))}
            </div>
 
-           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-             {[
-               "https://www.radiadorescopar.com/wp-content/uploads/2022/01/Mantenimiento-de-radiadores-y-tanques.jpg",
-               "https://www.semana.com/resizer/v2/ZB3P4J3OLRG65HAITZTUX7GP3Q.jpg?smart=true&auth=96bc2054da1f5af58bc69e9283acd9b66a3801d86acb4de47a8b819d3f3ab94c&width=1280&height=720",
-               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSbqt7m-ffhRiE2o5cb_HtQKKwB7qEuRi89CY8Ojvm_l4kK8VzQCoSWxbK&s=10",
-               "https://radiadoresingeradcol.com/wp-content/uploads/2024/06/servicio-tecnico-para-pagina-1.png",
-               "https://thermecs.co/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdqm9arff4%2Fimage%2Fupload%2Fv1768855830%2Fbenefits_radiadores_top_img_8eae236749.png&w=3840&q=75"
-             ].map((url, idx) => (
-                <div key={idx} className="aspect-square bg-[#1a1a1a] rounded-lg border border-white/5 overflow-hidden group">
-                  <img src={url} alt={`Trabajo realizado ${idx + 3}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+             {gridGallery.map((item, idx) => (
+                <div 
+                  key={idx} 
+                  onClick={() => setCarouselIndex(featuredGallery.length + idx)}
+                  className="aspect-square bg-[#1a1a1a] rounded-xl border border-white/5 overflow-hidden group shadow-lg hover:border-[#D71920]/40 transition-all relative cursor-pointer"
+                >
+                  <img 
+                    src={item.src} 
+                    alt={item.alt} 
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-3 text-center">
+                    <div className="p-2.5 bg-[#D71920] rounded-full text-white mb-2 shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                      <ZoomIn size={18} />
+                    </div>
+                    <span className="text-white text-xs font-semibold line-clamp-2 px-1">
+                      {item.title}
+                    </span>
+                  </div>
                 </div>
              ))}
            </div>
@@ -550,6 +976,99 @@ function App() {
           <span className="text-[10px] font-medium uppercase tracking-wider">Servicios</span>
         </a>
       </div>
+
+      {/* Carrusel Modal / Lightbox */}
+      {carouselIndex !== null && (
+        <div 
+          className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-black/95 backdrop-blur-md p-3 sm:p-6 transition-all"
+          onClick={handleCloseCarousel}
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Barra Superior */}
+          <div 
+            className="w-full max-w-6xl flex items-center justify-between z-10 py-2 px-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <span className="bg-[#D71920] text-white text-xs font-mono font-bold px-3 py-1 rounded-full">
+                {carouselIndex + 1} / {allGalleryImages.length}
+              </span>
+              <span className="text-white font-medium text-sm sm:text-base line-clamp-1">
+                {allGalleryImages[carouselIndex].title}
+              </span>
+            </div>
+
+            <button
+              onClick={handleCloseCarousel}
+              aria-label="Cerrar carrusel"
+              className="p-2 sm:p-2.5 rounded-full bg-white/10 hover:bg-[#D71920] text-white transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <X size={22} />
+            </button>
+          </div>
+
+          {/* Área Principal con Botones de Anterior / Siguiente e Imagen */}
+          <div 
+            className="relative w-full max-w-6xl flex-1 flex items-center justify-center my-auto min-h-0 px-2 sm:px-12"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botón Anterior */}
+            <button
+              onClick={handlePrevImage}
+              aria-label="Imagen anterior"
+              className="absolute left-1 sm:left-4 z-20 p-2.5 sm:p-4 rounded-full bg-black/70 hover:bg-[#D71920] text-white border border-white/15 transition-all hover:scale-110 active:scale-95 shadow-2xl backdrop-blur-sm cursor-pointer"
+            >
+              <ChevronLeft size={26} />
+            </button>
+
+            {/* Imagen Activa */}
+            <div className="relative max-h-[68vh] sm:max-h-[72vh] max-w-full flex items-center justify-center overflow-hidden rounded-2xl shadow-2xl border border-white/10 bg-[#0e0e0e]">
+              <img 
+                src={allGalleryImages[carouselIndex].src} 
+                alt={allGalleryImages[carouselIndex].alt}
+                className="max-h-[68vh] sm:max-h-[72vh] w-auto max-w-full object-contain rounded-2xl select-none transition-all duration-300"
+              />
+            </div>
+
+            {/* Botón Siguiente */}
+            <button
+              onClick={handleNextImage}
+              aria-label="Siguiente imagen"
+              className="absolute right-1 sm:right-4 z-20 p-2.5 sm:p-4 rounded-full bg-black/70 hover:bg-[#D71920] text-white border border-white/15 transition-all hover:scale-110 active:scale-95 shadow-2xl backdrop-blur-sm cursor-pointer"
+            >
+              <ChevronRight size={26} />
+            </button>
+          </div>
+
+          {/* Barra Inferior: Descripción y Tira de Miniaturas */}
+          <div 
+            className="w-full max-w-5xl flex flex-col items-center gap-2 sm:gap-3 z-10 pt-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-gray-300 text-xs sm:text-sm text-center max-w-xl line-clamp-1 px-4">
+              {allGalleryImages[carouselIndex].alt}
+            </p>
+
+            {/* Tira de Miniaturas */}
+            <div className="flex items-center gap-2 overflow-x-auto max-w-full p-1 scrollbar-thin">
+              {allGalleryImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCarouselIndex(idx)}
+                  className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                    idx === carouselIndex 
+                      ? 'border-[#D71920] scale-105 shadow-[0_0_12px_rgba(215,25,32,0.6)] opacity-100' 
+                      : 'border-white/20 opacity-50 hover:opacity-100 hover:border-white/50'
+                  }`}
+                >
+                  <img src={img.src} alt={`Miniatura ${idx + 1}`} className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Menú Modal WhatsApp (Móvil) */}
       {showWaMenu && (

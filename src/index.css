@@ -30,11 +30,11 @@
 
 @layer base {
   body {
-    @apply bg-[#0a0a0a] text-gray-300 font-sans antialiased selection:bg-[#D71920]/30 selection:text-white overflow-x-hidden;
+    @apply font-sans antialiased selection:bg-[#D71920]/30 selection:text-white overflow-x-hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-white tracking-tight;
+    @apply font-heading font-bold tracking-tight;
   }
 }
 
@@ -51,8 +51,16 @@
     @apply bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10;
   }
 
+  .glass-nav-light {
+    @apply bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm text-slate-800;
+  }
+
   .glass-panel {
     @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl;
+  }
+
+  .glass-panel-light {
+    @apply bg-white/85 backdrop-blur-lg border border-slate-200/80 shadow-xl;
   }
   
   .animate-fade-in-up {
@@ -93,3 +101,255 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* ==========================================================================
+   MODO OSCURO (Dark) — por defecto
+   ========================================================================== */
+html.dark body,
+html:not(.light) body {
+  background-color: #0a0a0a;
+  color: #d1d5db;
+}
+
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6,
+html:not(.light) h1, html:not(.light) h2, html:not(.light) h3, html:not(.light) h4, html:not(.light) h5, html:not(.light) h6 {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   MODO CLARO (Light) — completo y exhaustivo
+   ========================================================================== */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0f172a !important;
+}
+
+/* ── Fondos Principales de las secciones ── */
+html.light .bg-\[\#0a0a0a\] {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-\[\#0d0d0d\] {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-\[\#111111\] {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-\[\#111\] {
+  background-color: #e2e8f0 !important;
+}
+
+/* Tarjetas y paneles */
+html.light .bg-\[\#1a1a1a\] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.06);
+}
+
+html.light .bg-\[\#0e0e0e\] {
+  background-color: #f8fafc !important;
+}
+
+/* ── Navegación ── */
+html.light .glass-nav {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: #e2e8f0 !important;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+}
+
+html.light .glass-panel {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Utilidad bg-metallic-gradient ── */
+html.light .bg-metallic-gradient {
+  background: linear-gradient(to bottom right, #ffffff, #f8fafc) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ── Gradientes de fondo en secciones ── */
+html.light .from-\[\#0a0a0a\] {
+  --tw-gradient-from: #f1f5f9 !important;
+}
+
+html.light .to-\[\#111111\] {
+  --tw-gradient-to: #ffffff !important;
+}
+
+html.light .from-\[\#0a0a0a\]\/90 {
+  --tw-gradient-from: rgba(241, 245, 249, 0.9) !important;
+}
+
+html.light .from-\[\#0a0a0a\]\/40 {
+  --tw-gradient-from: rgba(241, 245, 249, 0.4) !important;
+}
+
+html.light .via-\[\#0a0a0a\]\/40 {
+  --tw-gradient-via: rgba(241, 245, 249, 0.4) !important;
+}
+
+/* ── Colores de Texto ── */
+html.light .text-white {
+  color: #0f172a !important;
+}
+
+html.light .text-gray-200 {
+  color: #334155 !important;
+}
+
+html.light .text-gray-300 {
+  color: #475569 !important;
+}
+
+html.light .text-gray-400 {
+  color: #64748b !important;
+}
+
+/* ── Bordes ── */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/15,
+html.light .border-white\/20,
+html.light .border-white\/30 {
+  border-color: #e2e8f0 !important;
+}
+
+/* ── Fondos semitransparentes de elementos de la UI ── */
+html.light .bg-white\/5 {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+
+html.light .bg-white\/10 {
+  background-color: rgba(226, 232, 240, 0.6) !important;
+}
+
+html.light .bg-white\/20 {
+  background-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* ── Botones con fondo rojo → texto blanco siempre ── */
+html.light .bg-\[\#D71920\],
+html.light .bg-\[\#D71920\] span,
+html.light .bg-\[\#D71920\] a,
+html.light .hover\:bg-\[\#b0151a\],
+html.light .bg-\[\#25D366\],
+html.light .bg-\[\#25D366\] span {
+  color: #ffffff !important;
+}
+
+/* ── Sombras rojas decorativas ── */
+html.light .shadow-\[\#D71920\]\/20 {
+  --tw-shadow-color: rgba(215, 25, 32, 0.1) !important;
+}
+
+/* ── Barra inferior móvil ── */
+html.light .md\:hidden.fixed.bottom-0 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-top-color: #e2e8f0 !important;
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06);
+}
+
+html.light .md\:hidden.fixed.bottom-0 a,
+html.light .md\:hidden.fixed.bottom-0 button {
+  color: #475569 !important;
+}
+
+html.light .md\:hidden.fixed.bottom-0 a:hover,
+html.light .md\:hidden.fixed.bottom-0 button:hover {
+  color: #0f172a !important;
+}
+
+/* ── WhatsApp modal overlay → conservar estilo oscuro ── */
+html.light .md\:hidden.fixed.inset-0.z-\[60\] .bg-\[\#111111\] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ── Carrusel de Fotos (Lightbox) → mantener inmersivo oscuro ── */
+html.light [role="dialog"] {
+  color: #ffffff !important;
+}
+
+html.light [role="dialog"] .text-white {
+  color: #ffffff !important;
+}
+
+html.light [role="dialog"] .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+/* ── Reproductor de Video → mantener inmersivo oscuro ── */
+html.light #videos .bg-black,
+html.light #videos video {
+  color: #ffffff !important;
+}
+
+html.light #videos .aspect-video .text-white,
+html.light #videos .aspect-video .text-gray-300 {
+  color: #ffffff !important;
+}
+
+html.light #videos .aspect-video h3,
+html.light #videos .aspect-video p,
+html.light #videos .aspect-video span {
+  color: #ffffff !important;
+}
+
+/* ── Botón de tema en Light Mode ── */
+html.light .bg-white\/10:is(button) {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+html.light .bg-white\/10:is(button):hover {
+  background-color: rgba(15, 23, 42, 0.14) !important;
+}
+
+/* ── Mapa en modo claro: restaurar colores completos ── */
+html.light iframe {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* ── Efecto glow rojo: suavizado para fondo claro ── */
+html.light .bg-\[\#D71920\]\/5 {
+  background-color: rgba(215, 25, 32, 0.04) !important;
+}
+
+html.light .bg-\[\#D71920\]\/10 {
+  background-color: rgba(215, 25, 32, 0.06) !important;
+}
+
+/* ── Footer y secciones con gradientes radiales ── */
+html.light .from-\[\#D71920\]\/5 {
+  --tw-gradient-from: rgba(215, 25, 32, 0.03) !important;
+}
+
+html.light .from-\[\#D71920\]\/40 {
+  --tw-gradient-from: rgba(215, 25, 32, 0.08) !important;
+}
+
+/* ── Transición suave global al cambiar de tema ── */
+html.light *,
+html.dark * {
+  transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
