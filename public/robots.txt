@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Permitir explícitamente a Googlebot e indexadores de imágenes
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /favicon.ico
+Allow: /favicon*.png
+Allow: /apple-touch-icon.png
+Allow: /og-image.jpg
+
+Sitemap: https://www.radiadoresmedellinad.com/sitemap.xml
