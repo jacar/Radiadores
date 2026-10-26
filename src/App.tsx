@@ -28,7 +28,9 @@ import {
   Grid,
   Mail,
   Sun,
-  Moon
+  Moon,
+  Truck,
+  Zap
 } from 'lucide-react';
 
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
@@ -97,6 +99,11 @@ const gridGallery = [
 const allGalleryImages = [...featuredGallery, ...gridGallery];
 
 const Services = [
+  {
+    title: "Servicio a Domicilio Express",
+    desc: "¿Te varaste por calentamiento o fuga de agua? Llegamos a tu ubicación en Medellín para diagnóstico, desmonte y reparación.",
+    icon: Truck
+  },
   {
     title: "Cambio de Tanque",
     desc: "Reemplazo de tanques deteriorados o averiados del radiador para evitar fugas y sobrecalentamientos.",
@@ -174,8 +181,9 @@ function App() {
   const videoPlayerRef = useRef<HTMLVideoElement>(null);
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
 
-  const whatsappUrl = "https://wa.me/573046106795?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
-  const whatsappUrl2 = "https://wa.me/573157687743?text=Hola,%20encontré%20Radiadores%20Medellín%20A&D%20y%20necesito%20información%20sobre%20un%20servicio%20para%20mi%20vehículo.";
+  const whatsappMessage = encodeURIComponent("Hola Radiadores Medellín A&D, estoy varado/necesito un servicio a domicilio para mi carro...");
+  const whatsappUrl = `https://wa.me/573046106795?text=${whatsappMessage}`;
+  const whatsappUrl2 = `https://wa.me/573157687743?text=${whatsappMessage}`;
 
   // Reproducir automáticamente al cambiar de video
   useEffect(() => {
@@ -296,6 +304,30 @@ function App() {
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
       {/* Navigation */}
       <nav className="fixed w-full z-50 glass-nav">
+        {/* Banner llamativo de urgencia y domicilio */}
+        <div className="bg-gradient-to-r from-[#b0151a] via-[#D71920] to-[#8a0e13] text-white py-1.5 px-3 sm:px-4 text-[11px] sm:text-xs md:text-sm font-bold shadow-md border-b border-red-500/30">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 truncate">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-90"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-400"></span>
+              </span>
+              <span className="truncate">
+                🚨 <span className="font-extrabold text-yellow-300 uppercase tracking-wide">¿Estás Varado?</span> ¡Servicio a Domicilio Inmediato para tu Carro en Medellín!
+              </span>
+            </div>
+            <a 
+              href={whatsappUrl} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="shrink-0 inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-300 text-black px-3 py-1 rounded-full text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all transform hover:scale-105 active:scale-95 shadow-md"
+            >
+              <WhatsAppIcon size={13} />
+              <span>Pedir Domicilio</span>
+            </a>
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-2">
             <div className="flex-shrink-0 flex items-center gap-2 sm:gap-4">
@@ -370,9 +402,13 @@ function App() {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-8 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6 animate-fade-in-up">
-                <span className="flex h-2 w-2 rounded-full bg-[#D71920] animate-pulse"></span>
-                <span className="text-gray-300 font-medium text-sm tracking-wide">Taller especializado en Medellín</span>
+              <div className="inline-flex flex-wrap items-center gap-2 p-1.5 pr-4 rounded-full bg-red-600/20 border border-red-500/40 mb-6 backdrop-blur-md animate-fade-in-up">
+                <span className="bg-[#D71920] text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                  <Truck size={14} /> ¡A Domicilio!
+                </span>
+                <span className="text-white font-semibold text-xs sm:text-sm">
+                  ¿Te varaste por calentamiento? Vamos a tu rescate 🚗💨
+                </span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
@@ -381,13 +417,13 @@ function App() {
               </h1>
               
               <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] font-medium">
-                Reparación, fabricación a medida en aluminio y soldadura automotriz. Calidad industrial, durabilidad comprobada y el mejor respaldo técnico para tu vehículo.
+                Reparación, fabricación a medida en aluminio y soldadura automotriz. Calidad industrial, durabilidad comprobada y servicio a domicilio para sacarte de apuros.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
                 <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-[#D71920] hover:bg-[#b0151a] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_rgba(215,25,32,0.3)] hover:shadow-[0_0_40px_rgba(215,25,32,0.5)] hover:-translate-y-1">
                   <WhatsAppIcon size={24} />
-                  <span>Cotizar servicio urgente</span>
+                  <span>Pedir auxilio / Domicilio</span>
                 </a>
                 <a href="tel:+573046106795" className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:-translate-y-1">
                   <Phone size={24} />
@@ -409,6 +445,7 @@ function App() {
                    <ul className="space-y-4">
                      {[
                        "Diagnóstico preciso y honesto",
+                       "Servicio y auxilio a domicilio",
                        "Soldadura 100% garantizada",
                        "Materiales de alta resistencia",
                        "Atención rápida en Medellín"
@@ -464,6 +501,95 @@ function App() {
                 <Camera size={20} />
                 Enviar foto por WhatsApp
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Banner / Sección Llamativa de Servicio a Domicilio y Varados */}
+      <section className="relative py-14 bg-gradient-to-b from-[#140808] via-[#1a0c0c] to-[#0a0a0a] border-y border-red-600/30 overflow-hidden">
+        {/* Resplandor decorativo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[300px] bg-red-600/15 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-[#1c1010] via-[#160d0d] to-[#0f0909] border-2 border-red-500/50 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-[0_0_50px_rgba(215,25,32,0.25)] relative overflow-hidden">
+            
+            {/* Distintivo de respuesta rápida */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-[#D71920] text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 shadow-md">
+              <Zap size={14} className="text-yellow-300 fill-yellow-300" />
+              <span>Atención Inmediata en Medellín y Valle de Aburrá</span>
+            </div>
+
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+                  ¿Te varaste por temperatura o fuga? <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 drop-shadow-sm">
+                    ¡Vamos hasta donde esté tu vehículo!
+                  </span>
+                </h2>
+
+                <p className="text-gray-300 text-base sm:text-lg mb-6 leading-relaxed max-w-2xl">
+                  <strong>No arriesgues tu motor ni pagues grúas costosas.</strong> Si el carro se recalentó, botó refrigerante o se rompió una manguera o tanque, nuestros técnicos van a tu casa, oficina o al punto de la varada para asistirte de inmediato.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-2">
+                  <div className="flex items-center gap-3 bg-white/5 p-3.5 rounded-xl border border-white/5">
+                    <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+                      <Truck size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">A Domicilio</h4>
+                      <p className="text-xs text-gray-400">Llegamos a tu ubicación</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 bg-white/5 p-3.5 rounded-xl border border-white/5">
+                    <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+                      <Wrench size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">Diagnóstico y Reparación</h4>
+                      <p className="text-xs text-gray-400">Desmonte y solución in situ</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 bg-white/5 p-3.5 rounded-xl border border-white/5">
+                    <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+                      <Clock size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">Sin Esperas</h4>
+                      <p className="text-xs text-gray-400">Prioridad por emergencia</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col gap-3.5 justify-center">
+                <a 
+                  href={whatsappUrl} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1ebd5a] text-white px-6 py-4 sm:py-5 rounded-2xl font-black text-lg transition-all shadow-[0_0_30px_rgba(37,211,102,0.45)] hover:shadow-[0_0_40px_rgba(37,211,102,0.65)] hover:-translate-y-1 text-center"
+                >
+                  <WhatsAppIcon size={26} />
+                  <span>PEDIR DOMICILIO YA</span>
+                </a>
+
+                <a 
+                  href="tel:+573046106795" 
+                  className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base transition-all border border-white/10 hover:-translate-y-0.5 text-center"
+                >
+                  <Phone size={18} />
+                  <span>Llamada de Emergencia</span>
+                </a>
+
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Técnicos disponibles en Medellín</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -845,13 +971,13 @@ function App() {
                 </div>
                 <div>
                   <h3 className="text-white font-bold text-xl mb-2">Sede Principal</h3>
-                  <p className="text-gray-400 mb-1">Carrera 50 #70-08</p>
-                  <p className="text-gray-400">Barrio Lovaina, Medellín</p>
+                  <p className="text-gray-400 mb-1">Carrera 62 #45-16</p>
+                  <p className="text-gray-400">Barrio Triste, Medellín</p>
                 </div>
               </div>
               
               <a 
-                href="https://www.google.com/maps/search/?api=1&query=Carrera+50+%2370-08+barrio+Lovaina+Medellin" 
+                href="https://www.google.com/maps/search/?api=1&query=Carrera+62+%2345-16+Barrio+Triste+Medellin" 
                 target="_blank" 
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1"
@@ -863,7 +989,7 @@ function App() {
             
             <div className="h-[400px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
               <iframe 
-                src="https://maps.google.com/maps?q=Carrera%2050%2370-08%20barrio%20Lovaina%20Medellin&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                src="https://maps.google.com/maps?q=Carrera%2062%20%2345-16%20Barrio%20Triste%20Medellin&t=&z=16&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
@@ -911,6 +1037,17 @@ function App() {
                   <a href="mailto:Aura_kristina79@hotmail.com" className="text-gray-400 hover:text-white transition-colors flex items-center gap-3">
                     <Mail size={18} />
                     <span className="break-all">Aura_kristina79@hotmail.com</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=Carrera+62+%2345-16+Barrio+Triste+Medellin" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-3"
+                  >
+                    <MapPin size={18} />
+                    <span>Carrera 62 #45-16, Barrio Triste</span>
                   </a>
                 </li>
               </ul>
