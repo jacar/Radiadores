@@ -304,30 +304,6 @@ function App() {
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 scroll-smooth pb-20 md:pb-0">
       {/* Navigation */}
       <nav className="fixed w-full z-50 glass-nav">
-        {/* Banner llamativo de urgencia y domicilio */}
-        <div className="bg-gradient-to-r from-[#b0151a] via-[#D71920] to-[#8a0e13] text-white py-1.5 px-3 sm:px-4 text-[11px] sm:text-xs md:text-sm font-bold shadow-md border-b border-red-500/30">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 truncate">
-              <span className="relative flex h-2.5 w-2.5 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-90"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-400"></span>
-              </span>
-              <span className="truncate">
-                🚨 <span className="font-extrabold text-yellow-300 uppercase tracking-wide">¿Estás Varado?</span> ¡Servicio a Domicilio Inmediato para tu Carro en Medellín!
-              </span>
-            </div>
-            <a 
-              href={whatsappUrl} 
-              target="_blank" 
-              rel="noreferrer" 
-              className="shrink-0 inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-300 text-black px-3 py-1 rounded-full text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all transform hover:scale-105 active:scale-95 shadow-md"
-            >
-              <WhatsAppIcon size={13} />
-              <span>Pedir Domicilio</span>
-            </a>
-          </div>
-        </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-2">
             <div className="flex-shrink-0 flex items-center gap-2 sm:gap-4">
@@ -402,13 +378,9 @@ function App() {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-8 max-w-3xl">
-              <div className="inline-flex flex-wrap items-center gap-2 p-1.5 pr-4 rounded-full bg-red-600/20 border border-red-500/40 mb-6 backdrop-blur-md animate-fade-in-up">
-                <span className="bg-[#D71920] text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                  <Truck size={14} /> ¡A Domicilio!
-                </span>
-                <span className="text-white font-semibold text-xs sm:text-sm">
-                  ¿Te varaste por calentamiento? Vamos a tu rescate 🚗💨
-                </span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6 animate-fade-in-up">
+                <span className="flex h-2 w-2 rounded-full bg-[#D71920] animate-pulse"></span>
+                <span className="text-gray-300 font-medium text-sm tracking-wide">Taller especializado en Medellín • Servicio a domicilio</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] animate-fade-in-up delay-100 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
@@ -417,13 +389,13 @@ function App() {
               </h1>
               
               <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] font-medium">
-                Reparación, fabricación a medida en aluminio y soldadura automotriz. Calidad industrial, durabilidad comprobada y servicio a domicilio para sacarte de apuros.
+                Reparación, fabricación a medida en aluminio y soldadura automotriz. Calidad industrial, durabilidad comprobada y atención técnica especializada en taller o a domicilio.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
                 <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-[#D71920] hover:bg-[#b0151a] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_rgba(215,25,32,0.3)] hover:shadow-[0_0_40px_rgba(215,25,32,0.5)] hover:-translate-y-1">
                   <WhatsAppIcon size={24} />
-                  <span>Pedir auxilio / Domicilio</span>
+                  <span>Cotizar servicio urgente</span>
                 </a>
                 <a href="tel:+573046106795" className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:-translate-y-1">
                   <Phone size={24} />
@@ -1075,15 +1047,40 @@ function App() {
       {/* Floating WhatsApp CTA (Desktop only) */}
       <div className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end group">
         {/* Menú emergente de WhatsApp */}
-        <div className="mb-4 bg-[#111111] border border-white/10 rounded-2xl p-3 shadow-2xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col gap-2 min-w-[220px]">
+        <div className="mb-4 bg-[#111111] border border-white/10 rounded-2xl p-3.5 shadow-2xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 flex flex-col gap-2 min-w-[240px]">
           <p className="text-white text-sm font-bold px-2 pb-2 border-b border-white/10 mb-1">¿Con quién deseas chatear?</p>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-xl transition-colors">
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-xl transition-colors">
             <WhatsAppIcon size={20} className="text-[#25D366]" />
-            <span className="text-gray-200 text-sm font-medium">Línea Principal</span>
+            <div className="flex flex-col text-left">
+              <span className="text-gray-200 text-sm font-medium">Línea Principal</span>
+              <span className="text-gray-500 text-xs">304 610 6795</span>
+            </div>
           </a>
-          <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-xl transition-colors">
+          <a href={whatsappUrl2} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-xl transition-colors">
             <WhatsAppIcon size={20} className="text-[#25D366]" />
-            <span className="text-gray-200 text-sm font-medium">Línea Alterna</span>
+            <div className="flex flex-col text-left">
+              <span className="text-gray-200 text-sm font-medium">Línea Alterna</span>
+              <span className="text-gray-500 text-xs">315 768 7743</span>
+            </div>
+          </a>
+
+          <div className="border-t border-white/10 my-0.5" />
+
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3 py-2.5 bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/5">
+            <div className="relative flex items-center justify-center w-7 h-7 rounded-lg bg-red-500/15 text-red-500 shrink-0">
+              <Truck size={15} />
+              <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-white text-xs font-bold tracking-wide">
+                Servicio a Domicilio
+              </span>
+              <span className="text-gray-400 text-[10px]">Atención para varados</span>
+            </div>
+            <ChevronRight size={13} className="text-gray-500 ml-auto" />
           </a>
         </div>
         {/* Botón Flotante */}
@@ -1229,6 +1226,18 @@ function App() {
                  <div className="flex flex-col">
                     <span className="text-white font-bold">Línea Alterna</span>
                     <span className="text-gray-400 text-sm">315 768 7743</span>
+                 </div>
+               </a>
+               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl active:bg-white/10 transition-colors border border-white/5">
+                 <div className="bg-red-500/20 p-2.5 rounded-full text-red-500">
+                    <Truck size={24} />
+                 </div>
+                 <div className="flex flex-col">
+                    <span className="text-white font-bold flex items-center gap-2">
+                      Servicio a Domicilio
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    </span>
+                    <span className="text-gray-400 text-sm">Atención para varados</span>
                  </div>
                </a>
              </div>
